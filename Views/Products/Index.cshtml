@@ -1,0 +1,66 @@
+@using Microsoft.AspNetCore.Identity
+@model IEnumerable<ShopEasy.Models.Product>
+
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Our Products</h2>
+
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Create" class="btn btn-primary">+ Add Product</a>
+    }
+
+</div>
+
+<form asp-action="Index" method="get" class="row g-2 mb-4">
+    <div class="col-md-5">
+        <input type="text" name="search" value="@ViewData["Search"]" class="form-control" placeholder="Product தேடுங்க..." />
+    </div>
+    <div class="col-md-3">
+        <select name="sort" class="form-select">
+            <option value="">Name (A-Z)</option>
+            <option value="price_asc" selected="@(ViewData["Sort"]?.ToString() == "price_asc")">Price: Low to High</option>
+            <option value="price_desc" selected="@(ViewData["Sort"]?.ToString() == "price_desc")">Price: High to Low</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">Search</button>
+    </div>
+    <div class="col-md-2">
+        <a asp-action="Index" class="btn btn-outline-secondary w-100">Reset</a>
+    </div>
+</form>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+
+                <img src="@(string.IsNullOrEmpty(item.ImageUrl) ? "https://via.placeholder.com/300x200?text=No+Image" : item.ImageUrl)"
+     class="card-img-top" style="height:200px; object-fit:cover;" alt="@item.Name" />
+
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text text-muted">@item.Description</p>
+                    <h4 class="text-success">₹@item.Price</h4>
+                    <p>Stock: @item.Stock</p>
+                </div>
+                <div class="card-footer bg-white">
+                    <a asp-controller="Cart" asp-action="Add" asp-route-id="@item.Id" class="btn btn-sm btn-success">Add to Cart</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">Details</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-warning">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                    }
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

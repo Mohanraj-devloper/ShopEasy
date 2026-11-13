@@ -1,0 +1,27 @@
+﻿@model List<ShopEasy.Models.CartItem>
+
+<h2>My Cart</h2>
+
+@if (!Model.Any())
+{
+    <p>Cart காலியா இருக்கு.</p>
+    <a asp-controller="Products" asp-action="Index" class="btn btn-primary">Shopping செய்ய</a>
+}
+else
+{
+    <table class="table">
+        <tr><th>Product</th><th>Price</th><th>Qty</th><th>Total</th><th></th></tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>₹@item.Price</td>
+                <td>@item.Quantity</td>
+                <td>₹@item.Total</td>
+                <td><a asp-action="Remove" asp-route-id="@item.ProductId" class="btn btn-sm btn-danger">Remove</a></td>
+            </tr>
+        }
+    </table>
+    <h4>Grand Total: ₹@Model.Sum(i => i.Total)</h4>
+    <a asp-action="Checkout" class="btn btn-success">Checkout</a>
+}

@@ -1,0 +1,21 @@
+﻿@model ShopEasy.Models.Order
+
+<h2>Order #@Model.Id</h2>
+<p><strong>Customer:</strong> @Model.CustomerName</p>
+<p><strong>Phone:</strong> @Model.Phone</p>
+<p><strong>Address:</strong> @Model.Address</p>
+
+<table class="table">
+    <tr><th>Product</th><th>Price</th><th>Qty</th></tr>
+    @foreach (var i in Model.Items)
+    {
+        <tr>
+            <td>@i.ProductName</td>
+            <td>₹@i.Price</td>
+            <td>@i.Quantity</td>
+        </tr>
+    }
+</table>
+
+<h4>Total: ₹@Model.TotalAmount</h4>
+<a asp-action="Index" class="btn btn-secondary">Back</a>

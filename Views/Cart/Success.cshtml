@@ -1,0 +1,8 @@
+﻿@model ShopEasy.Models.Order
+
+<div class="text-center mt-5">
+    <h2 class="text-success">Order வெற்றி! 🎉</h2>
+    <p>Order எண்: <strong>#@Model.Id</strong></p>
+    <p>நன்றி, @Model.CustomerName. மொத்தம்: ₹@Model.TotalAmount</p>
+    <a asp-controller="Products" asp-action="Index" class="btn btn-primary">மேலும் Shopping</a>
+</div>
