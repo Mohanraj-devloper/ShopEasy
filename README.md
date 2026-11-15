@@ -1,22 +1,18 @@
-# ShopEasy – E-Commerce Web Application
+# ShopEasy - E-commerce Website
 
-## Project Overview
-ShopEasy is an E-Commerce web application developed using ASP.NET Core MVC. It provides product management and shopping-related functionalities.
-
-## Technologies Used
-- C#
-- ASP.NET Core MVC
-- Entity Framework Core
-- SQL Server
-- HTML, CSS, Bootstrap
+An online shopping website built with ASP.NET Core MVC, Entity Framework Core and SQL Server.
 
 ## Features
-- Product Management (CRUD Operations)
-- Product Search
-- Product Sorting by Price and Name
-- Shopping Cart
-- Order Management
-- MVC Architecture
+- User registration and login (ASP.NET Core Identity)
+- Role-based authorization (Admin / Customer)
+- Product management with images (Admin only)
+- Product search and sorting
+- Shopping cart (Session-based)
+- Checkout and order management with automatic stock reduction
+- Admin orders page
+
+## Tech Stack
+C#, ASP.NET Core MVC, Entity Framework Core (Code First), SQL Server LocalDB, HTML, CSS,Bootstrap, Razor
 
 ## Project Structure
 - Controllers
